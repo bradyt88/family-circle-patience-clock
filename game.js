@@ -42,7 +42,7 @@ function build(){
    let e=document.createElement('div');e.className='slot';e.dataset.p=p;
    let a=(p-3)*30*Math.PI/180;
    e.style.left=(50+42*Math.cos(a))+'%';e.style.top=(50+42*Math.sin(a))+'%';
-   e.innerHTML='<label>'+p+'</label><div class="stack"></div><div class="target" aria-label="'+p+' o’clock drop zone"></div>';
+   e.innerHTML='<label>'+p+'</label><div class="stack"></div>';let z=document.createElement('div');z.className='drop-zone';z.dataset.p=p;z.setAttribute('aria-label',p+' o’clock drop zone');let zr=(p-3)*30*Math.PI/180;z.style.left=(50+26*Math.cos(zr))+'%';z.style.top=(50+26*Math.sin(zr))+'%';board.appendChild(z);
    e.addEventListener('click',()=>revealFrom(p));
    board.appendChild(e);
  }
@@ -58,7 +58,7 @@ function render(){
  for(let p=1;p<=12;p++){
    let st=document.querySelector('.slot[data-p="'+p+'"]'),el=st.querySelector('.stack');el.innerHTML='';
    backs(el,S.p[p].length);
-   (S.placed[p]||[]).forEach((x,i)=>{let c=card(x);c.style.transform='translate(-50%,-50%) translate('+i*2+'px,'+i*2+'px)';c.style.zIndex=10+i;st.querySelector('.target').appendChild(c)});
+   (S.placed[p]||[]).forEach((x,i)=>{let c=card(x);c.style.transform='translate(-50%,-50%) translate('+i*2+'px,'+i*2+'px)';c.style.zIndex=10+i;document.querySelector('.drop-zone[data-p="'+p+'"]').appendChild(c)});
    st.classList.toggle('active',S.phase==='play'&&S.at===p&&!S.pending);
  }
  backs(draw,S.draw.length);
@@ -137,7 +137,7 @@ function highlightTarget(x,y){
 function getTargetAt(x,y){
  const els=document.elementsFromPoint(x,y);
  for(const el of els){
-   const target=el.closest?.('.target');if(target){const slot=target.closest('.slot');return {type:'slot',p:Number(slot.dataset.p),el:slot,targetEl:target}};const slot=el.closest?.('.slot');if(slot)return {type:'slot',p:Number(slot.dataset.p),el:slot};
+   const zone=el.closest?.('.drop-zone');if(zone)return {type:'slot',p:Number(zone.dataset.p),el:document.querySelector('.slot[data-p="'+zone.dataset.p+'"]'),targetEl:zone};const slot=el.closest?.('.slot');if(slot)return {type:'slot',p:Number(slot.dataset.p),el:slot};
    if(el.closest?.('#kings'))return {type:'kings',el:kings.parentElement};
  }
  return null;
