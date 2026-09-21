@@ -64,7 +64,7 @@ function render(){
  backs(draw,S.draw.length);
  kings.innerHTML='';
  S.k.forEach((x,i)=>{let c=card(x);c.style.transform='translate(-50%,-50%) translate('+i*2+'px,'+i*2+'px)';kings.appendChild(c)});
- kings.parentElement.classList.toggle('active',S.phase==='play'&&S.at==='draw'&&S.draw.length>0&&!S.pending);
+ draw.parentElement.classList.toggle('active',S.phase==='play'&&S.at==='draw'&&S.draw.length>0&&!S.pending);
  document.querySelector('#moves').textContent=S.moves;
  document.querySelector('#seen').textContent=S.seen;
  document.querySelector('#time').textContent=fmt(S.time);
@@ -100,15 +100,14 @@ function showPending(){
  el.style.position='fixed';el.style.left='50%';el.style.top='50%';el.style.margin=0;el.style.zIndex=1000;
  document.body.appendChild(el);
  S.dragEl=el;
- const source=S.pendingSource;
- if(source)placeAtSource(el,source);
+ const sourceType=S.at;S.pendingSource=sourceType;
+ if(sourceType)placeAtSource(el,sourceType);
  else{
    const anchor=S.at==='draw'?draw:document.querySelector('.slot[data-p="'+S.at+'"] .stack');
    const r=anchor.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=(r.top+r.height/2)+'px';
  }
  el.addEventListener('pointerdown',startDrag);el.addEventListener('click',e=>e.stopPropagation());
- const sourceType=S.at;S.pendingSource=sourceType;
-}
+ }
 
 function placeAtSource(el,source){
  const anchor=source==='draw'?draw:document.querySelector('.slot[data-p="'+source+'"] .stack');
@@ -123,7 +122,7 @@ function startDrag(ev){
  S.dragEl.setPointerCapture(ev.pointerId);
  highlightTarget();
  S.dragEl.onpointermove=e=>{S.dragEl.style.left=e.clientX+'px';S.dragEl.style.top=e.clientY+'px';highlightTarget(e.clientX,e.clientY)};
- S.dragEl.onpointerup=e=>finishDrag(e.clientX,e.clientY);
+ S.dragEl.onpointerup=e=>{S.dragEl.releasePointerCapture?.(e.pointerId);finishDrag(e.clientX,e.clientY)};S.dragEl.onpointercancel=e=>{S.dragEl.releasePointerCapture?.(e.pointerId);finishDrag(e.clientX,e.clientY)};
 }
 
 function highlightTarget(x,y){
