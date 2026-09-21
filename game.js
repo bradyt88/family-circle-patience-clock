@@ -106,7 +106,7 @@ function showPending(){
    const anchor=S.at==='draw'?draw:document.querySelector('.slot[data-p="'+S.at+'"] .stack');
    const r=anchor.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=(r.top+r.height/2)+'px';
  }
- el.addEventListener('pointerdown',startDrag);
+ el.addEventListener('pointerdown',startDrag);el.addEventListener('click',e=>e.stopPropagation());
  const sourceType=S.at;S.pendingSource=sourceType;
 }
 
@@ -149,7 +149,7 @@ function finishDrag(x,y){
  if(!S.dragEl)return;
  const target=getTargetAt(x,y);
  highlightTarget();
- S.dragEl.releasePointerCapture?.(event?.pointerId);
+ 
  if(!isCorrectTarget(target)){
    S.dragEl.classList.remove('dragging');
    const source=S.pendingSource;
