@@ -42,7 +42,7 @@ function build(){
    let e=document.createElement('div');e.className='slot';e.dataset.p=p;
    let a=(p-3)*30*Math.PI/180;
    e.style.left=(50+42*Math.cos(a))+'%';e.style.top=(50+42*Math.sin(a))+'%';
-   e.innerHTML='<label>'+p+'</label><div class="stack"></div>';
+   e.innerHTML='<label>'+p+'</label><div class="stack"></div><div class="target" aria-label="'+p+' o’clock drop zone"></div>';
    e.addEventListener('click',()=>revealFrom(p));
    board.appendChild(e);
  }
@@ -58,7 +58,7 @@ function render(){
  for(let p=1;p<=12;p++){
    let st=document.querySelector('.slot[data-p="'+p+'"]'),el=st.querySelector('.stack');el.innerHTML='';
    backs(el,S.p[p].length);
-   (S.placed[p]||[]).forEach((x,i)=>{let c=card(x);c.style.transform='translate(-50%,-50%) translate('+i*2+'px,'+i*2+'px)';c.style.zIndex=10+i;el.appendChild(c)});
+   (S.placed[p]||[]).forEach((x,i)=>{let c=card(x);c.style.transform='translate(-50%,-50%) translate('+i*2+'px,'+i*2+'px)';c.style.zIndex=10+i;st.querySelector('.target').appendChild(c)});
    st.classList.toggle('active',S.phase==='play'&&S.at===p&&!S.pending);
  }
  backs(draw,S.draw.length);
@@ -130,14 +130,14 @@ function highlightTarget(x,y){
  if(x==null)return;
  const target=getTargetAt(x,y);
  if(target){
-   if(isCorrectTarget(target))target.el.classList.add('drop-target');else target.el.classList.add('drop-wrong');
+   if(isCorrectTarget(target))(target.targetEl||target.el).classList.add('drop-target');else (target.targetEl||target.el).classList.add('drop-wrong');
  }
 }
 
 function getTargetAt(x,y){
  const els=document.elementsFromPoint(x,y);
  for(const el of els){
-   const slot=el.closest?.('.slot');if(slot)return {type:'slot',p:Number(slot.dataset.p),el:slot};
+   const target=el.closest?.('.target');if(target){const slot=target.closest('.slot');return {type:'slot',p:Number(slot.dataset.p),el:slot,targetEl:target}};const slot=el.closest?.('.slot');if(slot)return {type:'slot',p:Number(slot.dataset.p),el:slot};
    if(el.closest?.('#kings'))return {type:'kings',el:kings.parentElement};
  }
  return null;
