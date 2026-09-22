@@ -56,7 +56,7 @@ function backs(el,n){
 
 function render(){
  for(let p=1;p<=12;p++){
-   let st=document.querySelector('.slot[data-p="'+p+'"]'),el=st.querySelector('.stack');el.innerHTML='';
+   let st=document.querySelector('.slot[data-p="'+p+'"]'),el=st.querySelector('.stack'),zone=document.querySelector('.drop-zone[data-p="'+p+'"]');el.innerHTML='';zone.innerHTML='';
    backs(el,S.p[p].length);
    (S.placed[p]||[]).forEach((x,i)=>{let c=card(x);c.style.transform='translate(-50%,-50%) translate('+i*2+'px,'+i*2+'px)';c.style.zIndex=10+i;document.querySelector('.drop-zone[data-p="'+p+'"]').appendChild(c)});
    st.classList.toggle('active',S.phase==='play'&&S.at===p&&!S.pending);
@@ -152,6 +152,7 @@ function finishDrag(x,y){
  if(!isCorrectTarget(target)){
    S.dragEl.classList.remove('dragging');
    const source=S.pendingSource;
+   S.dragging=false;
    setTimeout(()=>{if(S.dragEl){placeAtSource(S.dragEl,source);S.dragEl.classList.remove('dragging')}},80);
    S.statusReturn=true;
    return;
