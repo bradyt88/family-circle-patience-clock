@@ -4,3 +4,38 @@
 
 /* Inner clock drop placeholders */
 .drop-zone{position:absolute;width:62px;height:84px;transform:translate(-50%,-50%);border:2px dashed #3a7890;border-radius:9px;background:#06172599;box-shadow:inset 0 0 18px #0008;z-index:1;pointer-events:auto}.drop-zone:after{content:"DROP";position:absolute;inset:0;display:grid;place-items:center;color:#6f91a8;font-size:7px;font-weight:900;letter-spacing:1.5px}.drop-zone .card{z-index:2}.drop-zone:has(.card):after{display:none}.slot{z-index:2}.slot .stack{z-index:3}.slot.active .stack{filter:drop-shadow(0 0 13px #24d9ff)}.drop-target{filter:drop-shadow(0 0 18px #24d9ff)!important}.drop-target{border-color:#5ee7ff!important;background:#0b314455;box-shadow:0 0 22px #24d9ff66,inset 0 0 18px #0008}.drop-wrong{border-color:#ff3b72!important;background:#3b0b1844}
+
+
+/* Mobile landscape layout */
+.rotate-prompt{display:none}
+@media (max-width:650px) and (orientation:landscape){
+  header{height:58px;padding:7px 12px;gap:10px}
+  header button{width:40px;height:40px;font-size:20px}
+  .brand img{width:38px;height:38px}
+  main{padding:10px 10px 18px}
+  .head{margin-bottom:8px}
+  h1{font-size:25px}
+  .head p{font-size:11px;max-width:420px}
+  .felt{width:min(92vw,calc(100svh - 86px),880px)}
+  .slot{width:57px;height:78px}
+  .slot label{font-size:11px}
+  .stack{width:49px;height:66px}
+  .card{width:45px;height:62px;font-size:16px}
+  .drop-zone{width:49px;height:66px}
+  .centre{gap:6px}
+  .centre section{min-width:49px}
+  .pile{width:49px;height:66px}
+  .centre .card{width:45px;height:62px}
+  .felt>#indicator{font-size:9px;padding:6px 10px;bottom:3%}
+  .info{display:none}
+}
+@media (max-width:650px) and (orientation:portrait){
+  body{overflow:hidden}
+  .rotate-prompt{position:fixed;inset:0;display:grid;place-items:center;z-index:100;background:radial-gradient(circle at 50% 35%,#142044,#02040d 72%);padding:24px}
+  .rotate-card{width:min(390px,100%);text-align:center;padding:28px 22px;border:1px solid #31518a;border-radius:24px;background:#0a1329eF;box-shadow:0 25px 80px #000b}
+  .rotate-icon{width:62px;height:62px;margin:0 auto 14px;display:grid;place-items:center;border:2px solid #24d9ff;border-radius:18px;color:#5ee7ff;font-size:34px;animation:rotateHint 1.8s ease-in-out infinite}
+  .rotate-card h2{margin:0 0 8px;font-size:24px}
+  .rotate-card p{margin:0;color:#aab8d2;font-size:13px;line-height:1.55}
+  .rotate-card small{display:block;margin-top:14px;color:#7183a6;font-size:10px}
+}
+@keyframes rotateHint{0%,100%{transform:rotate(0deg)}50%{transform:rotate(90deg)}}
