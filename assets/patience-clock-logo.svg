@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 520" role="img" aria-labelledby="title desc">
+<title id="title">Patience Clock</title><desc id="desc">A neon blue and purple clock face surrounded by playing cards with Patience Clock lettering.</desc>
+<defs>
+ <radialGradient id="bg" cx="50%" cy="45%"><stop offset="0" stop-color="#173a68"/><stop offset=".65" stop-color="#07162e"/><stop offset="1" stop-color="#020611"/></radialGradient>
+ <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#24d9ff"/><stop offset=".5" stop-color="#8e45ff"/><stop offset="1" stop-color="#ff36bd"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff1a8"/><stop offset=".45" stop-color="#ffd45a"/><stop offset="1" stop-color="#d88416"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="700" height="520" rx="42" fill="url(#bg)"/>
+<circle cx="350" cy="235" r="205" fill="#030916" stroke="url(#ring)" stroke-width="7" filter="url(#glow)"/>
+<circle cx="350" cy="235" r="190" fill="none" stroke="#245c83" stroke-width="2"/>
+<circle cx="350" cy="235" r="174" fill="none" stroke="#1b4665" stroke-dasharray="2 12" stroke-width="2"/>
+<!-- clock hands -->
+<path d="M350 235V95" stroke="url(#gold)" stroke-width="9" stroke-linecap="round"/>
+<path d="M350 235L430 165" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+<circle cx="350" cy="235" r="13" fill="url(#gold)" stroke="#fff0a0" stroke-width="2"/>
+<!-- cards around the clock -->
+<g font-family="Arial,sans-serif" font-weight="900" text-anchor="middle">
+ <g transform="translate(330 48) rotate(-3)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#111">Q</text><text x="29" y="52" font-size="18" fill="#111">♠</text></g>
+ <g transform="translate(445 73) rotate(18)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#c92a3f">A</text><text x="29" y="52" font-size="18" fill="#c92a3f">♥</text></g>
+ <g transform="translate(528 142) rotate(34)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#111">3</text><text x="29" y="52" font-size="18" fill="#111">♣</text></g>
+ <g transform="translate(111 142) rotate(-34)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#c92a3f">10</text><text x="29" y="52" font-size="18" fill="#c92a3f">♦</text></g>
+ <g transform="translate(183 73) rotate(-18)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#111">J</text><text x="29" y="52" font-size="18" fill="#111">♣</text></g>
+ <g transform="translate(500 270) rotate(24)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#c92a3f">4</text><text x="29" y="52" font-size="18" fill="#c92a3f">♥</text></g>
+ <g transform="translate(142 270) rotate(-24)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#c92a3f">8</text><text x="29" y="52" font-size="18" fill="#c92a3f">♦</text></g>
+ <g transform="translate(315 365) rotate(3)"><rect width="58" height="76" rx="8" fill="#f7f8fb" stroke="#d6dbe5"/><text x="29" y="30" font-size="20" fill="#111">5</text><text x="29" y="52" font-size="18" fill="#111">♠</text></g>
+</g>
+<g font-family="Arial Black,Arial,sans-serif" font-weight="900" text-anchor="middle">
+ <text x="350" y="315" font-size="76" fill="url(#gold)" stroke="#2b1300" stroke-width="7" paint-order="stroke">PATIENCE</text>
+ <text x="350" y="383" font-size="64" letter-spacing="7" fill="#5ee7ff" stroke="#06152d" stroke-width="6" paint-order="stroke">CLOCK</text>
+</g>
+<path d="M170 407H255M445 407H530" stroke="#dca22f" stroke-width="5" stroke-linecap="round"/>
+</svg>
